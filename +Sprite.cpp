@@ -171,7 +171,7 @@ void Sprite::MoveDown()
 
 void Sprite::MoveLeft()
 {
-	m_posx -= 1;
+	m_posx -= 2;
 	if (m_posx < 0)
 		m_posx = 0;
 }
@@ -179,7 +179,7 @@ void Sprite::MoveLeft()
 
 void Sprite::MoveRight()
 {
-	m_posx += 1;
+	m_posx += 2;
 	if (m_posx > displayWidth - 16)
 		m_posx = displayWidth - 16;
 }

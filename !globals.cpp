@@ -27,13 +27,13 @@ extern const float displayHeight { 720 };										//Might be able to make this 
 extern const float FPS { 60.00 };
 
 
-extern bool keys[4]{ false, false, false, false };							//Initialize all keys as not pressed
+extern bool keys[5]{ false, false, false, false, false};							//Initialize all keys as not pressed
 
 extern const double PI { 3.14159 };											//Initialize PI with value of 3.14159
 
 extern int CurrFrame = 0;
 extern int FrameCount = 0;
-extern int FrameDelay = 60;
+extern int FrameDelay = 1;
 
 extern const int NumPlyr1Bullets = 10;
 extern const int NumComets = 10;
@@ -45,6 +45,7 @@ extern const int NumPoints = 3;												//Redundenat???? - Think this was use
 
 
 //The followig should be made more local when everything is finalized.
+extern float old_time = 0.0;
 extern int invadctr = 10;
 extern bool invadersMovementState[3]{ false, false, false };							//Initialize invadersDir
 

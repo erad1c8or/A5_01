@@ -89,8 +89,6 @@ int application::createWindow(int width, int height, float FPS)
 	al_init_font_addon();
 	al_init_ttf_addon();
 
-
-
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
@@ -101,6 +99,11 @@ int application::createWindow(int width, int height, float FPS)
 
 void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 {
+	
+	/* FONTS SHOULD BE SETUP ELSEWHERE BUT ARE HACKED IN HERE FOR NOW */
+	ALLEGRO_FONT *defaultfont = al_create_builtin_font();
+	//ALLEGRO_FONT *bebasneuereg24pt = al_load_font("BebasNeue_Reg.ttf", 24, 0);
+
 	std::cout << "+App.cpp - entered gameLoop\n";
 	//std::cout << "+App.cpp - Test String Constructor\n";
 		
@@ -183,6 +186,27 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 
 	std::cout << "+App.cpp - starting game loop proper\n";
 
+
+
+
+/*
+	while (!quit) {
+		al_clear_to_color(al_map_rgb(0, 0, 0));
+		double new_time = al_get_time();
+		float fps = 1.0f / (new_time - old_time);
+		old_time = new_time;
+		al_draw_textf(ttf_font, al_map_rgb(255, 255, 255), 0.0, 0.0, "FPS : %f", fps);
+		al_flip_display();
+		if (!al_is_event_queue_empty()) { quit = true; }
+	}
+*/
+
+
+
+
+
+
+
 	al_start_timer(timer);
 	while (looping)
 	{
@@ -215,6 +239,29 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 			else if (keys[RIGHT])
 				//std::cout << "keysRIGHT\n";
 				plyr01_glob_ptr->MoveRight();
+			
+			if (keys[SPACE])
+				//std::cout << "ALLEGRO_KEY_K\n";
+				//al_draw_textf(defaultfont, al_map_rgb(255, 255, 255), 100.0, 700.0, ALLEGRO_ALIGN_CENTER, "MESSAGE");
+				//for (int i = 0; i < vectorarrayofinvaders2; i++)
+			{
+				vectorarrayofinvaders2[0].m_posx = 472;
+				vectorarrayofinvaders2[1].m_posx = 504;
+				vectorarrayofinvaders2[2].m_posx = 536;
+				vectorarrayofinvaders2[3].m_posx = 568;
+				vectorarrayofinvaders2[4].m_posx = 600;
+				vectorarrayofinvaders2[5].m_posx = 632;
+				vectorarrayofinvaders2[6].m_posx = 664;
+				vectorarrayofinvaders2[7].m_posx = 696;
+				vectorarrayofinvaders2[8].m_posx = 728;
+				vectorarrayofinvaders2[9].m_posx = 760;
+				vectorarrayofinvaders2[10].m_posx = 792;
+			}
+			//for (int i = 0; i < invadersTotal; i++)
+			//{
+				//vectorarrayofinvaders2[i].m_posx = invadersPosXMin + ((invadersWidth + invadersSpaceX) * invadersColNum);
+				//std::cout << vectorarrayofinvaders2[i].m_posx << "\n";
+				//std::cout << "keysLEFT\n";
 
 
 			// Basic Animation for plyr1, rendering the next frame of animation every X (per FrameDelay) frames, as 1 animation frame each frame is too fast.
@@ -237,7 +284,7 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 				{
 					if (vectorarrayofinvaders2[i].m_posx < displayWidth - 16)
 					{
-						vectorarrayofinvaders2[i].m_posx += 16;
+						vectorarrayofinvaders2[i].m_posx += 8;
 					}
 				}
 				FrameCount = 0;
@@ -268,6 +315,11 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 				//keyboard.key[RIGHT] = true;
 				keys[RIGHT] = true;
 				break;
+			case ALLEGRO_KEY_SPACE:
+				//keyboard.key[RIGHT] = true;
+				keys[SPACE] = true;
+				break;
+			
 			}
 		}
 		
@@ -291,6 +343,10 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 				keys[RIGHT] = false;
 				//keyboard.key[RIGHT] = false;
 				break;
+			case ALLEGRO_KEY_SPACE:
+				keys[SPACE] = false;
+				//keyboard.key[RIGHT] = false;
+				break;
 			}
 		}
 			
@@ -307,6 +363,15 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 			redraw = false;
 
 			al_clear_to_color(al_map_rgb(0, 0, 0));
+
+			
+						
+			double new_time = al_get_time();
+			float onscreen_fps = 1.0f / (new_time - old_time);
+			old_time = new_time;
+			al_draw_textf(defaultfont, al_map_rgb(255, 255, 255), 100.0, 600.0, ALLEGRO_ALIGN_CENTER, "FPS : %f", onscreen_fps);
+			//if (!al_is_event_queue_empty()) { quit = true; }
+
 			
 			// Draw
 			//std::cout << "TESTING" << endl;

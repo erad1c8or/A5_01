@@ -10,8 +10,9 @@
 //#include "+Sprite.hpp"																		//Required re declaration of Sprite objects herein
 #include "02_gamecode_01.hpp"																//Required re definition of variables specific to invaders
 
-extern int invadctr;
 
+extern float old_time;
+extern int invadctr;
 extern bool invadersMovementState[3];
 enum invadersMovementState { INVADERSMOVINGRIGHT, INVADERSATLEFTEDGE, INVADERSATRIGHTEDGE };
 
@@ -27,6 +28,7 @@ extern Sprite *invader_glob_ptr;															//declare pointer re the definiti
 //
 
 extern application *myapp;																	//forward declaration
+//extern ALLEGRO_FONT *defaultfont;
 
 //extern Sprite plyr01;
 //extern Sprite invader01;
@@ -42,8 +44,8 @@ extern const float invadersStartPosX;
 
 
 //Move to keys at some time...
-enum keys { UP, DOWN, LEFT, RIGHT };
-extern bool keys[4];												//Declare 4 bools per the above enumeration
+enum keys { UP, DOWN, LEFT, RIGHT, SPACE };
+extern bool keys[5];												//Declare 4 bools per the above enumeration
 
 
 extern const double PI;												//Declare PI

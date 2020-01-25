@@ -118,8 +118,8 @@ int main()
 	std::cout << "main.cpp - now starting to shutdown/uninstall allegro components\n";
 	system("pause");
 
+
 	std::cout << "+App.cpp - Temporary hacked in font cleanup - al_destroy_font(bebasneuereg24pt)\n";
-	//al_destroy_font(bebasneuereg24pt);
 	std::cout << "App.cpp - al_shutdown_ttf_addon()\n";
 	system("pause");
 	al_shutdown_ttf_addon();
