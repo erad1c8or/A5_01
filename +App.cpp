@@ -189,22 +189,6 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 
 
 
-/*
-	while (!quit) {
-		al_clear_to_color(al_map_rgb(0, 0, 0));
-		double new_time = al_get_time();
-		float fps = 1.0f / (new_time - old_time);
-		old_time = new_time;
-		al_draw_textf(ttf_font, al_map_rgb(255, 255, 255), 0.0, 0.0, "FPS : %f", fps);
-		al_flip_display();
-		if (!al_is_event_queue_empty()) { quit = true; }
-	}
-*/
-
-
-
-
-
 
 
 	al_start_timer(timer);
@@ -230,12 +214,15 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 				//std::cout << "keysUP\n";
 				//invaderglob_pntr->m_posy--;
 				(*plyr01_glob_ptr).MoveUp();							//This is equivalent to... plyr01_glob_ptr->MoveUp(); re calling function from the class that plyr01_glob_ptr points to.
+			
 			else if (keys[DOWN])
 				//std::cout << "keysDOWN\n";
 				plyr01_glob_ptr->MoveDown();
+			
 			if (keys[LEFT])
 				//std::cout << "keysLEFT\n";
 				plyr01_glob_ptr->MoveLeft();
+			
 			else if (keys[RIGHT])
 				//std::cout << "keysRIGHT\n";
 				plyr01_glob_ptr->MoveRight();
@@ -243,27 +230,27 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 			if (keys[SPACE])
 				//std::cout << "ALLEGRO_KEY_K\n";
 				//al_draw_textf(defaultfont, al_map_rgb(255, 255, 255), 100.0, 700.0, ALLEGRO_ALIGN_CENTER, "MESSAGE");
-				//for (int i = 0; i < vectorarrayofinvaders2; i++)
 			{
-				vectorarrayofinvaders2[0].m_posx = 472;
-				vectorarrayofinvaders2[1].m_posx = 504;
-				vectorarrayofinvaders2[2].m_posx = 536;
-				vectorarrayofinvaders2[3].m_posx = 568;
-				vectorarrayofinvaders2[4].m_posx = 600;
-				vectorarrayofinvaders2[5].m_posx = 632;
-				vectorarrayofinvaders2[6].m_posx = 664;
-				vectorarrayofinvaders2[7].m_posx = 696;
-				vectorarrayofinvaders2[8].m_posx = 728;
-				vectorarrayofinvaders2[9].m_posx = 760;
-				vectorarrayofinvaders2[10].m_posx = 792;
+				invadctr = -1;
+				std::cout << invadctr;
+				if (FrameDelay == 0)
+				{
+					FrameDelay = 60;
+				}
+				else FrameDelay = 0;
+			
+				for (int i = 0; i < vectorarrayofinvaders2.size(); i++)
+				{
+				vectorarrayofinvaders2[i].m_posx = vectorarrayofinvaders2[i].m_posxInitial;
+				}
+
 			}
-			//for (int i = 0; i < invadersTotal; i++)
-			//{
-				//vectorarrayofinvaders2[i].m_posx = invadersPosXMin + ((invadersWidth + invadersSpaceX) * invadersColNum);
-				//std::cout << vectorarrayofinvaders2[i].m_posx << "\n";
-				//std::cout << "keysLEFT\n";
 
 
+
+
+
+			/*
 			// Basic Animation for plyr1, rendering the next frame of animation every X (per FrameDelay) frames, as 1 animation frame each frame is too fast.
 			if (++FrameCount >= FrameDelay)								//If incremented FrameCount >= FrameDelay, it's time to render the next animation frame.
 			{
@@ -275,24 +262,47 @@ void application::gameLoop(std::vector<Sprite> &vectorarrayofinvaders2)
 
 				FrameCount = 0;											//Finally we reset FrameCount to 0 so we know when to draw the next animation frame
 			}
+			*/
 
 
 
-			if (++FrameCount >= FrameDelay)
+			//invadctr +=1;
+
+
+			if (++FrameCount >= FrameDelay)															//WIP Invaders Movement
 			{
-				for (int i = 0; i < vectorarrayofinvaders2.size(); i++)
+				if (invadctr < vectorarrayofinvaders2.size())
 				{
-					if (vectorarrayofinvaders2[i].m_posx < displayWidth - 16)
+					if (vectorarrayofinvaders2[invadctr].m_posx < displayWidth - 16)
 					{
-						vectorarrayofinvaders2[i].m_posx += 8;
+						vectorarrayofinvaders2[invadctr].MoveRight();
 					}
+					if (invadctr < vectorarrayofinvaders2.size())
+						invadctr++;
 				}
-				FrameCount = 0;
+				else invadctr = 0;
+			FrameCount = 0;
 			}
+
+
+			
+//			if (++FrameCount >= FrameDelay)
+//			{
+//				for (int i = 0; i < vectorarrayofinvaders2.size(); i++)
+//				{
+//					if (vectorarrayofinvaders2[i].m_posx < displayWidth - 16)
+//					{
+//						vectorarrayofinvaders2[i].m_posx += 8;
+//					}
+//				}
+//				FrameCount = 0;
+//			}
 
 			redraw = true;
 		}
 
+
+		
 
 
 		else if (ev.type == ALLEGRO_EVENT_KEY_DOWN)

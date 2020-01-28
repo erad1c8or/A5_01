@@ -19,7 +19,7 @@ public:
 	Sprite();																			//default constructor
 	Sprite(float posx, float posy);
 	Sprite(std::string assetName, float posx, float posy);
-	Sprite(std::string objectName, std::string assetName, float posx, float posy);
+	Sprite(std::string objectName, std::string assetName, float posx, float posy, float movSpeed);
 	Sprite(std::string assetName, std::string assetCategory, std::string assetFormat, int lastFrame, float posx, float posy);
 
 
@@ -29,7 +29,9 @@ public:
 	std::string m_objectName;
 	float m_posx{ 0 };
 	float m_posy{ 0 };
-
+	float m_posxInitial{ 0 };
+	float m_posyInitial{ 0 };
+	float m_movSpeed{ 0 };
 	ALLEGRO_BITMAP *m_bitmap = nullptr;													//create *bitmap (ptr)
 	//end of the variables moved as noted above
 

@@ -19,12 +19,15 @@ Sprite::Sprite(float posx, float posy)
 
 
 
-Sprite::Sprite (std::string objectName, std::string assetName, float posx, float posy)
+Sprite::Sprite (std::string objectName, std::string assetName, float posx, float posy, float movSpeed)
 	:
 	m_objectName{ objectName },
 	m_Name{ assetName },
 	m_posx{ posx },																	//create object.m_posx and initialize via uniform initialization
 	m_posy{ posy },																	//create object.m_posy and initialize via uniform initialization
+	m_posxInitial{ 0 },
+	m_posyInitial{ 0 },
+	m_movSpeed{ movSpeed },
 	m_bitmap{ NULL }																//dereference bitmap (ptr) and initialize as NULL via uniform initialization
 	//PlyrAnimFrame { NULL }
 {
@@ -171,7 +174,7 @@ void Sprite::MoveDown()
 
 void Sprite::MoveLeft()
 {
-	m_posx -= 2;
+	m_posx -= m_movSpeed;
 	if (m_posx < 0)
 		m_posx = 0;
 }
@@ -179,7 +182,7 @@ void Sprite::MoveLeft()
 
 void Sprite::MoveRight()
 {
-	m_posx += 2;
+	m_posx += m_movSpeed;
 	if (m_posx > displayWidth - 16)
 		m_posx = displayWidth - 16;
 }

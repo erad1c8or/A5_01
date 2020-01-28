@@ -12,7 +12,7 @@ void createarrayofinvaders()
 {
 	//temporarily moved from !globals.cpp
 	//invader_glob_vector.reserve(15);
-	std::vector<Sprite> vectorarrayofinvaders(invadersNum, Sprite("vectorarrayofinvaders", "Square_16x16_Green", invadersStartPosX, 300));
+	std::vector<Sprite> vectorarrayofinvaders(invadersNum, Sprite("vectorarrayofinvaders", "Square_16x16_Green", invadersStartPosX, 300, 2.0));
 	std::cout << "...the current size of invader_glob_vector = " << vectorarrayofinvaders.size() << "\n";
 	system("pause");
 }
@@ -37,13 +37,14 @@ std::vector<Sprite> createarrayofinvaders2()
 {
 	//temporarily moved from !globals.cpp
 	//invader_glob_vector.reserve(15);
-	const int invadersNumRows{ 1 };
+	const int invadersNumRows{ 5 };
 	const int invadersPerRow{ 11 };
 	const int invadersTotal{ invadersNumRows * invadersPerRow };				//At this stage, this could be equated to the size of the array
 	//const float invadersStartPosX = { ((displayWidth - ((11 - float(0.5)) * 32)) / 2) + 1 };
 	//const int displayWidth2{ 1280 };
-	const int invadersSpaceX{ 16 };
-	const int invadersSpaceY{ 32 };
+
+	const int invadersSpaceX{ 0 };
+	const int invadersSpaceY{ 20 };
 	const int invadersWidth{ 16 };								//This will be part of the sprite struct for final...
 
 
@@ -59,17 +60,20 @@ std::vector<Sprite> createarrayofinvaders2()
 	int invadersPosXMin = (displayWidth - (invadersPerRow * invadersWidth) - ((invadersPerRow - 1) * invadersSpaceX)) / 2;			//Need to get 16 from some other variable that will be defined in the sprite struct.
 
 	
-	std::vector<Sprite> vectorarrayofinvaders2(invadersTotal, Sprite("vectorarrayofinvaders2", "Square_16x16_Green", 0, 164));
+	std::vector<Sprite> vectorarrayofinvaders2(invadersTotal, Sprite("vectorarrayofinvaders2", "Invader01B", 0.0, 100.0, 2.0));
 	std::cout << "...the current size of vectorarrayofinvaders2 = " << vectorarrayofinvaders2.size() << "\n";
 	system("pause");
 	
 	for (int i = 0; i < invadersTotal; i++)
 	{
+		vectorarrayofinvaders2[i].m_posxInitial = invadersPosXMin + ((invadersWidth + invadersSpaceX) * invadersColNum);
 		vectorarrayofinvaders2[i].m_posx = invadersPosXMin + ((invadersWidth + invadersSpaceX) * invadersColNum);
 		std::cout << vectorarrayofinvaders2[i].m_posx << "\n";
 		system("pause");
-		vectorarrayofinvaders2[i].m_posy = vectorarrayofinvaders2[i].m_posy + (invadersSpaceY * invadersRowNum);
-		vectorarrayofinvaders2[i].m_bitmap = al_load_bitmap("Assets/Square_16x16_Green00.png");			//Set the bitmap for...
+		vectorarrayofinvaders2[i].m_movSpeed = 2.0;
+		vectorarrayofinvaders2[i].m_posyInitial = vectorarrayofinvaders2[i].m_posy - (invadersSpaceY * invadersRowNum);
+		vectorarrayofinvaders2[i].m_posy = vectorarrayofinvaders2[i].m_posy - (invadersSpaceY * invadersRowNum);
+		vectorarrayofinvaders2[i].m_bitmap = al_load_bitmap("Assets/Invader01B.png");			//Set the bitmap for...   THIS SHOULD AT LEAST USE THE NAME PASSED IN
 		//if i = numInvadersPerRow
 		invadersColNum++;
 		//input_vectorarray[i]

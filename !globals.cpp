@@ -10,7 +10,7 @@
 /* Dynamic Global Pointers*/
 //A pointer is a variable that holds a memory address where a value lives.
 //new int;																							//dynamically allocate an integer (and discard the result)
-Sprite *plyr01_glob_ptr = new Sprite{ "plyr01_glob_ptr", "Square_16x16_Green", 633, 720 - 16 };			//dynamically allocate (=new etc.) a Sprite & assign the address returned to ptr so it can be accessed later.
+Sprite *plyr01_glob_ptr = new Sprite{ "plyr01_glob_ptr", "Square_16x16_Green", displayWidth/2, displayHeight-16, 2.0 };			//dynamically allocate (=new etc.) a Sprite & assign the address returned to ptr so it can be accessed later.
 
 
 
@@ -22,8 +22,8 @@ application *myapp = new application;							//create *myapp (ptr), where type of
 
 extern std::string assetsDir = "assets/";
 
-extern const float displayWidth { 1280 };										//Might be able to make this type int, currently a float so can be used in Explosion Trigonometry
-extern const float displayHeight { 720 };										//Might be able to make this type int, currently a float so can be used in Explosion Trigonometry
+extern const float displayWidth { 224 };										//Might be able to make this type int, currently a float so can be used in Explosion Trigonometry
+extern const float displayHeight { 256 };										//Might be able to make this type int, currently a float so can be used in Explosion Trigonometry
 extern const float FPS { 60.00 };
 
 
@@ -33,7 +33,7 @@ extern const double PI { 3.14159 };											//Initialize PI with value of 3.14
 
 extern int CurrFrame = 0;
 extern int FrameCount = 0;
-extern int FrameDelay = 1;
+extern int FrameDelay = 0;
 
 extern const int NumPlyr1Bullets = 10;
 extern const int NumComets = 10;
@@ -46,7 +46,7 @@ extern const int NumPoints = 3;												//Redundenat???? - Think this was use
 
 //The followig should be made more local when everything is finalized.
 extern float old_time = 0.0;
-extern int invadctr = 10;
+extern int invadctr = 0;
 extern bool invadersMovementState[3]{ false, false, false };							//Initialize invadersDir
 
 
@@ -61,21 +61,21 @@ extern const float invadersStartPosX = { ((displayWidth - ((11 - float(0.5)) * 3
 //There is no better way to construct all elements with the same value, unless they are all initialized as 0. 
 Sprite *invader_glob_ptr{ new Sprite[invadersNum]
 	{
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 },
-				{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100 }
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+		//		{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 },
+				{ "invader_glob_ptr", "Square_16x16_Green", invadersStartPosX, 100, 2.0 }
 			}
 };
 //dynamically allocate (=new etc.) an ARRAY of Sprites & assign the address returned to ptr so it can be accessed later.
